@@ -12,7 +12,6 @@ let sprite = function (filename, block_w, block_h, mapWidth) {
     this.image.src = filename;
     this.runAnimationIndex = 0;
     this.sc = document.getElementById("main_canvas").getContext("2d");
-    this.sc.translate(1, 1);
 
     this.drawAnimation = function(x, y, indexes) {
         runAnimationIndex++;
