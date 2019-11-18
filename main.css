@@ -5,8 +5,8 @@
     border-style: groove;
 }
 
-.main{
-    height: 15cm;
+.main {
+    height: 100vh;
     width: 100%;
     display: flex;
     min-height: 100%;
@@ -14,8 +14,11 @@
 }
 
 #main_canvas{
-    width: 100%;
-    height: 100%;
+    border-color: aliceblue;
+    border-style: groove;
+    z-index: 1;
+    bottom: 0;
+    position: absolute;
 }
 
 .right-menu{
@@ -27,7 +30,7 @@
 .main_screen{
     height: 100%;
     width: 100%;
-    background-image: url("res/cyberpunk-street-files/PNG/cyberpunk-street.png");
+    background-image: url("res/cyberpunk-street-files/cyberpunk-street.png");
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: 100%, 100%;
