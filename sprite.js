@@ -3,7 +3,6 @@
  * @param filename
  * @param block_w
  * @param block_h
- * @param indexes
  * @param mapWidth
  */
 let sprite = function (filename, block_w, block_h, mapWidth) {
@@ -24,7 +23,7 @@ let sprite = function (filename, block_w, block_h, mapWidth) {
         this.sc.clearRect(0, 0, 1000, 1000);
         this.sc.drawImage(this.image, spriteX*block_w, spriteY*block_h, block_w, block_h, x, y, block_w, block_h)
     }
-}
+};
 
 /**
  * Returns the x,y-position of the index in a sprite sheet
