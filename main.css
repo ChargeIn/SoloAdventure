@@ -7,15 +7,19 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
+    min-width: 1000px;
+    min-height: 600px;
     position: relative;
 }
 
 .left_menu {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 30vw;
+    height: 100vh;
+    width: 20vw;
     left: 0;
+    min-width: 200px;
+    min-height: 600px;
     background-color: red;
     position: absolute;
 }
@@ -23,8 +27,10 @@ body {
 .right-menu{
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100vh;
     width: 20vw;
+    min-width: 200px;
+    min-height: 600px;
     right: 0;
     position: absolute;
 }
@@ -33,13 +39,15 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    min-width: 600px;
+    min-height: 600px;
     background-image: url("res/cyberpunk-street-files/cyberpunk-street.png");
     background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: 100%, 100%;
+    background-position: center;
+    background-size: 800px;
     background-color:#092C45;
     position: absolute;
-    left: 30vw;
+    left: 20vw;
     right: 20vw;
 }
 
@@ -47,8 +55,8 @@ body {
     margin: 0;
     border-color: black;
     border-style: groove;
-    top: 60vh;
-    bottom: 0;
+    top: 40vh;
+    bottom: 40vh;
     left: 0;
     right: 0;
     position: absolute;
@@ -62,4 +70,34 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+}
+
+@media (max-width: 1000px){
+    .main {
+        width: 1000px;
+        height: 600px;
+    }
+
+    .left_menu {
+        width: 200px;
+        left: 0;
+    }
+
+    .right-menu{
+        width: 200px;
+        right: 0;
+        position: absolute;
+    }
+
+    .main_screen{
+        left: 200px;
+        width: 600px;
+    }
+}
+
+@media (max-height: 600px) {
+    #div_main_canvas{
+        height: 400px;
+        top: 100px;
+    }
 }
