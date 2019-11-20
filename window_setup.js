@@ -1,8 +1,6 @@
-//let canvas = document.getElementById("main_canvas");
-//canvas.width = window.innerWidth*0.75;
-//canvas.height = window.innerHeight/3;
 
-let dpi = window.devicePixelRatio;
+
+let dpi = 1.1;//window.devicePixelRatio;
 //get canvas
 let canvas = document.getElementById('main_canvas');
 //get context

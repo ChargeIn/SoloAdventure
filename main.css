@@ -7,19 +7,18 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    min-width: 1000px;
-    min-height: 400px;
+    min-width: 1200px;
+    min-height: 600px;
     position: relative;
 }
 
 .left_menu {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 500px;
     width: 20vw;
     left: 0;
-    min-width: 200px;
-    min-height: 400px;
+    min-width: 240px;
     background-color: red;
     position: absolute;
 }
@@ -27,10 +26,9 @@ body {
 .right-menu{
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 500px;
     width: 20vw;
-    min-width: 200px;
-    min-height: 400px;
+    min-width: 240px;
     right: 0;
     position: absolute;
 }
@@ -38,13 +36,12 @@ body {
 .main_screen{
     margin: 0;
     padding: 0;
-    height: 100vh;
-    min-width: 600px;
-    min-height: 400px;
+    height: 500px;
+    min-width: 720px;
     background-image: url("res/cyberpunk-street-files/cyberpunk-street.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 800px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 720px;
     background-color:#092C45;
     position: absolute;
     left: 20vw;
@@ -52,14 +49,14 @@ body {
 }
 
 #div_main_canvas{
-    margin: 0;
+    position: absolute;
     border-color: black;
     border-style: groove;
-    top: 40vh;
-    bottom: 40vh;
-    left: 0;
-    right: 0;
-    position: absolute;
+    top: 300px;
+    left: 50%;
+    margin-left: -360px;
+    width: 720px;
+    height: 200px;
 }
 
 
@@ -72,32 +69,42 @@ body {
     z-index: 1;
 }
 
-@media (max-width: 1000px){
+.log{
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 500px;
+    min-height: 100px;
+    min-width: 1200px;
+    border-style: groove;
+    border-color: red;
+    position: absolute;
+}
+
+@media (max-width: 1200px){
     .main {
-        width: 1000px;
-        height: 600px;
+        width: 1200px;
     }
 
     .left_menu {
-        width: 200px;
+        width: 240px;
         left: 0;
     }
 
     .right-menu{
-        width: 200px;
+        width: 240px;
         right: 0;
         position: absolute;
     }
 
     .main_screen{
-        left: 200px;
-        width: 600px;
+        left: 240px;
+        width: 720px;
     }
 }
 
-@media (max-height: 400px) {
-    #div_main_canvas{
-        height: 400px;
-        top: 100px;
-    }
+@media (max-height: 600px) {
+
 }
