@@ -1,11 +1,17 @@
+
+const run = 0;
+const fight = 1;
+
 /**
  * Object representing all information about the adventurer
- * @type {{w: number, x: number, h: number, runningIndex: number[], y: number, mapWidth: number}}
  */
 const adventurerObj = {
     x: 50, // size of the sprite
     y: 37,
-    runningIndex: [8,9,10,11,12,13], // index of the running sprites
+    mode: [ // 0: Running 1:Fighting
+        [8,9,10,11,12,13], // index of the running sprites
+        [49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59] // index of the fighting sprites
+    ],
     mapWidth: 7 // number of sprites per row
 };
 
@@ -15,7 +21,7 @@ const zombieObj = {
 };
 
 const main_screen = {
-  floor:  canvas.height -10,
+  floor:  canvas.height -10 -adventurerObj.x,
   middle: canvas.width/2
 };
 
@@ -27,7 +33,7 @@ let lastCall = null;
 function step(timestamp){
     let progress = timestamp -lastCall;
     if (progress > 100 ) {
-        adventurer.drawAnimation(main_screen.middle, main_screen.floor, adventurerObj.runningIndex);
+        adventurer.drawAnimation(main_screen.middle, main_screen.floor, adventurerObj.mode[run]);
         lastCall = timestamp;
     }
     window.requestAnimationFrame(step);
