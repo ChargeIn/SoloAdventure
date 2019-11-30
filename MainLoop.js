@@ -75,7 +75,7 @@ class MainLoop {
      */
     update() {
         this.adventurer.update(100);
-        this.enemy.update(backgroundSpeed*1.1);
+        this.enemy.update();
     };
 
     /**

@@ -148,8 +148,8 @@ class Zombie extends Character{
         super(x,y, sprite, mode, speed);
     }
 
-    update(speed) {
-        this.x -= speed;
+    update() {
+        this.x -= this.speed;
     }
 }
 
