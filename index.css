@@ -38,10 +38,6 @@ body {
     padding: 0;
     height: 500px;
     min-width: 720px;
-    background-image: url("res/cyberpunk-street-files/cyberpunk-street.png");
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: 720px;
     background-color:#092C45;
     position: absolute;
     left: 20vw;
@@ -52,11 +48,10 @@ body {
     position: absolute;
     border-color: black;
     border-style: groove;
-    top: 300px;
-    left: 50%;
-    margin-left: -360px;
-    width: 720px;
-    height: 200px;
+    top: 200px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 
