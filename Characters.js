@@ -1,5 +1,9 @@
 const run = 0;
 const fight = 1;
+const baseLife = 100;
+const baseAttack = 100;
+const baseSpeed = (canvas_w/2)/10; // with the base speed the adventurer should reach the enemy in 10 sec
+const animationSpeed = 8; // Change sprites 10 time each second
 
 
 /**
@@ -15,7 +19,8 @@ class Sprite {
 
         this.image = new Image();
         this.image.src = filename;
-        this.runAnimationIndex = 0;
+        this.animationIndex = 0;
+        this.animationCount = 0;
         this.mapWidth = mapWidth;
         this.block_w = block_w;
         this.block_h = block_h;
@@ -40,12 +45,16 @@ class Sprite {
      * @param y-Position on the canvas
      */
     drawAnimation(x, y) {
-        this.runAnimationIndex++;
+        if(this.animationCount >= animationSpeed){
+            this.animationIndex++;
+            this.animationCount=0;
+        }
+        this.animationCount++;
 
-        if (this.runAnimationIndex >= this.indexes[this.mode].length)
-            this.runAnimationIndex = 0;
+        if (this.animationIndex >= this.indexes[this.mode].length)
+            this.animationIndex = 0;
 
-        let [spriteX, spriteY] = this.i2xy(this.indexes[this.mode][this.runAnimationIndex], this.mapWidth);
+        let [spriteX, spriteY] = this.i2xy(this.indexes[this.mode][this.animationIndex], this.mapWidth);
         this.sc.drawImage(this.image, spriteX * this.block_w, spriteY * this.block_h,
             this.block_w, this.block_h, x, y-this.width, this.width, this.height)
     }
@@ -89,7 +98,11 @@ class Character{
         this.x = x;
         this.y = y;
         this.mode = mode;
-        this.speed = speed;
+    }
+
+    switchMode(mode){
+        this.mode = mode;
+        this.sprite.switchMode(mode);
     }
 
     /**
@@ -110,11 +123,9 @@ class Character{
  * Animation: Runs till the cap is reached and starts attacking
  */
 class Adventurer extends Character{
-    constructor(x,y, sprite, mode, speed) {
-        super(x,y, sprite, mode, speed);
-        this.run = true;
-        this.stop = 0;
-        this.end = 100;
+    constructor(x,y, sprite, mode) {
+        super(x,y, sprite, mode);
+        this.attack = baseAttack;
     }
 
     /**
@@ -123,34 +134,43 @@ class Adventurer extends Character{
      * @param enemyHealth Health of the enemy, if 0 the character will run to the other side
      */
     update(enemyHealth) {
-        if(this.run) {
-            this.stop += this.speed;
-            if(this.stop > this.end){
-                this.run = false;
-                this.sprite.switchMode(fight);
-                this.stop = 0;
-            }
+        console.log(this.sprite.mode);
+        if(this.mode === run) {
+            if(enemyHealth > 0) this.switchMode(fight);
         } else {
-            if (enemyHealth <= 0) {
-                this.run = true;
-                this.sprite.switchMode(run);
-            }
+            if (enemyHealth <= 0) this.switchMode(run);
         }
     }
 }
 
 /**
  * Starter Enemy of the game
- * Stands still till the adventurer is reached
+ * Walks till the adventurer is reached
  */
-class Zombie extends Character{
-    constructor(x,y, sprite, mode, speed) {
-        super(x,y, sprite, mode, speed);
+class Enemy extends Character{
+    constructor(x,y, sprite, mode) {
+        super(x,y, sprite, mode);
+        this.life = baseLife;
+        this.speed = baseSpeed;
     }
 
-    update() {
-        this.x -= this.speed;
+    update(damage) {
+        if(damage === 0)  {
+            this.x -= this.speed/fps;
+        } else {
+            this.life -= damage/fps;
+        }
     }
+
+    /**
+     * Resets the enemy
+     */
+    reset(){
+        this.x = canvas_w + spawnOffset;
+        this.life = baseLife;
+    }
+
+
 }
 
 

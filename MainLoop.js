@@ -2,13 +2,14 @@
  * This Script represents the main game loop
  */
 // We want to achieve 60 fps a sec
-const fps = 10;
+const fps = 60;
 const timeStep = 1000 / fps;
 const canvas_h = canvas.height;
 const canvas_w = canvas.width;
 const char_w = 90;
 const char_h = 70;
-const backgroundSpeed = 10;
+const spawnOffset = char_w - 20;
+const fightOffset = 50;
 //TODO: Rework indexes of the sprites
 
 class MainLoop {
@@ -25,17 +26,22 @@ class MainLoop {
                 [ // 0: Running 1:Fighting
                     [8, 9, 10, 11, 12, 13], // index of the running sprites
                     [49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59] // index of the fighting sprites
-                ], 0), 0, 1);
-        this.enemy = new Zombie(canvas_w - 50, main_screen.floor-10,
+                ], 0), 0);
+        this.enemy = new Enemy(canvas_w - spawnOffset, main_screen.floor+10,
             new Sprite("res/undead sprite pack/undead_walk_sheet_flipped.png",
                 56, 48, char_w, char_h, 20,
                 [// 0: Running 1:Fighting
                     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], // index of running sprites
                     [] // has no fighting sprites
-                ], 0), 0 , 10);
+                ], 0), 0);
 
-        this.background = new Background("res/cyberpunk-street-files/cyberpunk-street.png", backgroundSpeed);
+        this.background = new Background("res/cyberpunk-street-files/cyberpunk-street.png");
         this.background.start();
+
+        // Setting up upgrades
+        // TODO: Save and Load Upgrades form cookies
+
+
     };
 
     /**
@@ -74,8 +80,16 @@ class MainLoop {
      * Updates the game-logic at the rate of the fps
      */
     update() {
-        this.adventurer.update(100);
-        this.enemy.update();
+        if(this.adventurer.x >= this.enemy.x - fightOffset){
+            this.adventurer.update(this.enemy.life);
+            this.enemy.update(this.adventurer.attack);
+        } else {
+            this.adventurer.update(0);
+            this.enemy.update(0);
+        }
+
+        if(this.enemy.life < 0) this.enemy.reset();
+
     };
 
     /**

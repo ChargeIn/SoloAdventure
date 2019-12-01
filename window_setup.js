@@ -23,11 +23,11 @@ function fix_dpi() {
  * Creates an endless looped background
  */
 class Background{
-    constructor(imgFile, speed) {
+    constructor(imgFile) {
         this.img = new Image();
         this.img.src = imgFile;
         this.running = false;
-        this.speed = speed;
+        this.speed = baseSpeed;
         this.scroll = 0; // represents how far the background has scrolled
         this.sc = document.getElementById("main_canvas").getContext("2d");
     }
@@ -57,7 +57,7 @@ class Background{
         this.sc.drawImage(this.img,canvas_w + offset + this.scroll,0, canvas_w, canvas_h);
 
         if (this.running){
-            this.scroll -= this.speed;
+            this.scroll -= this.speed/fps;
             if (this.scroll <= offset2) this.scroll = 0;
         }
     }
