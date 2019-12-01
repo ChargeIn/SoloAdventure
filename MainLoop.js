@@ -17,6 +17,7 @@ class MainLoop {
     constructor() {
         this.lastUpdate = 0;
         this.repeat = false; // if the game loop should be repeated
+        this.inFight = false;
         this.sc = document.getElementById("main_canvas").getContext("2d");
 
         // create character
@@ -80,16 +81,35 @@ class MainLoop {
      * Updates the game-logic at the rate of the fps
      */
     update() {
-        if(this.adventurer.x >= this.enemy.x - fightOffset){
+        if(this.inFight){
             this.adventurer.update(this.enemy.life);
             this.enemy.update(this.adventurer.attack);
-        } else {
-            this.adventurer.update(0);
-            this.enemy.update(0);
+
+            if(this.enemy.life < 0) {
+                this.enemy.reset();
+                this.inFight = false;
+                this.background.start();
+            }
+        } else { // Not fighting
+
+            //Test if adventurer is close enough to start a fight
+            if (this.adventurer.x >= this.enemy.x - fightOffset) {
+                this.background.stop();
+
+                this.adventurer.update(this.enemy.life);
+                this.enemy.update(this.adventurer.attack);
+
+                if(this.enemy.life < 0) {
+                    this.enemy.reset();
+                    this.inFight = false;
+                    this.background.start();
+                }
+            // Running
+            } else {
+                this.adventurer.update(0);
+                this.enemy.update(0);
+            }
         }
-
-        if(this.enemy.life < 0) this.enemy.reset();
-
     };
 
     /**
