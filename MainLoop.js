@@ -18,7 +18,6 @@ class MainLoop {
         this.lastUpdate = 0;
         this.repeat = false; // if the game loop should be repeated
         this.inFight = false;
-        this.sc = document.getElementById("main_canvas").getContext("2d");
 
         // create character
         this.adventurer = new Adventurer(main_screen.middle-char_w, main_screen.floor,
