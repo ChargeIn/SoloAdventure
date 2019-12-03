@@ -134,7 +134,6 @@ class Adventurer extends Character{
      * @param enemyHealth Health of the enemy, if 0 the character will run to the other side
      */
     update(enemyHealth) {
-        console.log(this.sprite.mode);
         if(this.mode === run) {
             if(enemyHealth > 0) this.switchMode(fight);
         } else {

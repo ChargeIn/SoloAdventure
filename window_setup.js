@@ -30,6 +30,7 @@ class Background{
         this.speed = baseSpeed;
         this.scroll = 0; // represents how far the background has scrolled
         this.sc = document.getElementById("main_canvas").getContext("2d");
+        this.scrollReset = -canvas.width;//reset position of the background images
     }
 
     /**
@@ -51,14 +52,14 @@ class Background{
      */
     draw(){
         //image is not perfectly mirrored
-        const offset = -570;
-        const offset2 = -780;
+        //const offset = -570;
+        //const offset2 = -780;
         this.sc.drawImage(this.img, this.scroll, 0, canvas_w, canvas_h);
-        this.sc.drawImage(this.img,canvas_w + offset + this.scroll,0, canvas_w, canvas_h);
+        this.sc.drawImage(this.img,canvas_w + this.scroll,0, canvas_w, canvas_h);
 
         if (this.running){
             this.scroll -= this.speed/fps;
-            if (this.scroll <= offset2) this.scroll = 0;
+            if (this.scroll <= this.scrollReset) this.scroll = 0;
         }
     }
 }
