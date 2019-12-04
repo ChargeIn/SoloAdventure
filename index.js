@@ -27,6 +27,10 @@ function saveGame(exdays) {
     document.cookie = "cookie=save-game;" + expires+ ";path=/";
 }
 
+function increase(speed){
+    mainLoop.modifyAttributes(speed, 1);
+}
+
 /**
  * Loads the right cookie
  * @param cname Name of the cookie

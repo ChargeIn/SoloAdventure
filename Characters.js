@@ -1,7 +1,7 @@
 const run = 0;
 const fight = 1;
 const baseLife = 100;
-const baseAttack = 100;
+const baseAttack = 1;
 const baseSpeed = (canvas_w/2)/10; // with the base speed the adventurer should reach the enemy in 10 sec
 const animationSpeed = 8; // Change sprites 10 time each second
 
@@ -140,6 +140,18 @@ class Adventurer extends Character{
             if (enemyHealth <= 0) this.switchMode(run);
         }
     }
+
+    /**
+     * Modifies the attack of the adventurer
+     * @param attack The amount used for the altering of the attribute
+     */
+    modifyAttack(attack) {
+        this.attack += attack;
+    }
+
+    getAttack() {
+        return this.attack;
+    }
 }
 
 /**
@@ -149,7 +161,8 @@ class Adventurer extends Character{
 class Enemy extends Character{
     constructor(x,y, sprite, mode) {
         super(x,y, sprite, mode);
-        this.life = baseLife;
+        this.hp = baseLife;
+        this.maxHp = baseLife;
         this.speed = baseSpeed;
     }
 
@@ -157,7 +170,7 @@ class Enemy extends Character{
         if(damage === 0)  {
             this.x -= this.speed/fps;
         } else {
-            this.life -= damage/fps;
+            this.hp -= damage/fps;
         }
     }
 
@@ -166,10 +179,37 @@ class Enemy extends Character{
      */
     reset(){
         this.x = canvas_w + spawnOffset;
-        this.life = baseLife;
+        this.hp = this.maxHp;
+    }
+
+    /**
+     * Modifies the speed of the enemy
+     * @param speed How much the speed should be increased
+     */
+    modifySpeed(speed){
+        this.speed += speed;
     }
 
 
+    /**
+     * Modifies the max health of the enemy
+     * @param health How much the max life should be increased
+     */
+    modifyMaxHealth(health) {
+        this.maxHp += health;
+    }
+
+    /**
+     * Returns if the hitpoints of an enemy are less than zero
+     * @returns {boolean} True is this.hp < 0
+     */
+    isDead() {
+        return this.hp <= 0;
+    }
+
+    getLife() {
+        return this.hp;
+    }
 }
 
 

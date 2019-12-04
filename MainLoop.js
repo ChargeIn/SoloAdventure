@@ -95,10 +95,10 @@ class MainLoop {
             if (this.adventurer.x >= this.enemy.x - fightOffset) {
                 this.background.stop();
 
-                this.adventurer.update(this.enemy.life);
-                this.enemy.update(this.adventurer.attack);
+                this.adventurer.update(this.enemy.getLife());
+                this.enemy.update(this.adventurer.getAttack());
 
-                if(this.enemy.life < 0) {
+                if(this.enemy.isDead()) {
                     this.enemy.reset();
                     this.inFight = false;
                     this.background.start();
@@ -119,5 +119,25 @@ class MainLoop {
         this.adventurer.draw();
         this.enemy.draw();
     };
+
+    /**
+     * Changes the attributes of the characters based on the given value
+     * @param attribute The attribute which should be modified
+     * @param value The value used for the increase/decrease of the attributes
+     */
+    modifyAttributes(attribute, value){
+        switch (attribute) {
+            case "speed":
+                this.enemy.modifySpeed(value);
+                this.background.increaseSpeed(value);
+                break;
+            case "health":
+                this.enemy.modifyMaxHealth(value);
+                break;
+            default: //Attack
+                this.adventurer.modifyAttack(value);
+                break;
+        }
+    }
 
 }

@@ -62,4 +62,8 @@ class Background{
             if (this.scroll <= this.scrollReset) this.scroll = 0;
         }
     }
+
+    increaseSpeed(speed) {
+        this.speed += speed;
+    }
 }
