@@ -63,7 +63,13 @@ class Background{
         }
     }
 
-    increaseSpeed(speed) {
-        this.speed += speed;
+    modifyAttribute(attr, value) {
+        switch (attr) {
+            case "speed":
+                this.speed = baseSpeed + speedMultiplier*value;
+                break;
+            default:
+                break;
+        }
     }
 }

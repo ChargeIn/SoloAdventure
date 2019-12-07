@@ -16,20 +16,36 @@
                 <div id="attack">Attack
                     <button class="buttonAdd" onclick="increase('attack')"></button>
                 </div>
+                <div id="attackSpeed">Attack Speed
+                    <button class="buttonAdd" onclick="increase('attackSpeed')"></button>
+                </div>
+                <div id="crit">Critical Strike Chance
+                    <button class="buttonAdd" onclick="increase('crit')"></button>
+                </div>
+                <div id="critDMG">Critical Strike Damage
+                    <button class="buttonAdd" onclick="increase('critDMG')"></button>
+                </div>
+                <div id="magic">Magic
+                    <button class="buttonAdd" onclick="increase('magic')"></button>
+                </div>
             </div>
-            <div id="Enemy">
-                <div id="health">Health of Enemies
-                    <button class="buttonAdd" onclick="increase('health')"></button>
-                </div>
-                <div id="numberOfEnemies">Number of Enemies
-                    <button class="buttonAdd" onclick="increase('numOfEnemies')"></button>
-                </div>
+            <div id="Stats">
+                <div id="Stat_Attack">Attack: 1</div>
+                <div id="Stat_AttackSpeed">Attack-Speed: 1</div>
+                <div id="Stat_Speed">Running Speed: 0</div>
+                <div id="Stat_Crit">Critical Strike Chance: 0.1</div>
+                <div id="Stat_CritDMG">Critical Strike Damage: 1.5</div>
+                <div id="Stat_Magic">Magic: 0</div>
+                <div id="Stat_Health">Health per Enemy: 100</div>
+                <div id="Stat_NumberOfEnemies">Number of Enemies: 1</div>
             </div>
         </div>
 
         <div class="main_screen">
-            <div id="info_bar_main"></div>
-
+            <div id="info_bar_main">
+                <div id="DPS"><strong>DPS: 0</strong></div>
+                <div id="Gold">Gold: 0</div>
+            </div>
             <div id="div_main_canvas" onclick="go2google()">
                 <canvas id="main_canvas"></canvas>
             </div>
@@ -38,7 +54,7 @@
         <div class="log"></div>
     </section>
     <script type="text/javascript" src="window_setup.js"></script>
-    <script type="text/javascript" src="MainLoop.js"></script>
+    <script type="text/javascript" src="GameModell.js"></script>
     <script type="text/javascript" src="Characters.js"></script>
     <script type="text/javascript" src=index.js></script>
 </body>

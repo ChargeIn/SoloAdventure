@@ -10,9 +10,20 @@ const char_w = 90;
 const char_h = 70;
 const spawnOffset = char_w - 20;
 const fightOffset = 50;
+const gameStats = {
+    attack: 0,
+    speed: 0,
+    health: 0,
+    numberOfEnemies: 0,
+    crit: 0,
+    critDMG: 0,
+    magic: 0,
+    gold: 0,
+    attackSpeed: 0
+};
 //TODO: Rework indexes of the sprites
 
-class MainLoop {
+class gameModell {
 
     constructor() {
         this.lastUpdate = 0;
@@ -81,10 +92,10 @@ class MainLoop {
      */
     update() {
         if(this.inFight){
-            this.adventurer.update(this.enemy.life);
+            this.adventurer.update(this.enemy.getLife());
             this.enemy.update(this.adventurer.attack);
 
-            if(this.enemy.life < 0) {
+            if(this.enemy.getLife() < 0) {
                 this.enemy.reset();
                 this.inFight = false;
                 this.background.start();
@@ -122,22 +133,26 @@ class MainLoop {
 
     /**
      * Changes the attributes of the characters based on the given value
-     * @param attribute The attribute which should be modified
+     * @param attr The attribute which should be modified
      * @param value The value used for the increase/decrease of the attributes
      */
-    modifyAttributes(attribute, value){
-        switch (attribute) {
-            case "speed":
-                this.enemy.modifySpeed(value);
-                this.background.increaseSpeed(value);
-                break;
-            case "health":
-                this.enemy.modifyMaxHealth(value);
-                break;
-            default: //Attack
-                this.adventurer.modifyAttack(value);
-                break;
-        }
+    modifyAttribute(attr, value){
+        gameStats[attr] += value;
+
+        this.background.modifyAttribute(attr,gameStats[attr]);
+        this.adventurer.modifyAttribute(attr, gameStats[attr]);
+        this.enemy.modifyAttribute(attr, gameStats[attr]);
+    }
+
+    /**
+     * Recalculates the DPS and updates the dps view
+     */
+    getCurrentDPS(){
+        // calculate the time till the fight start
+        let timeRunning = canvas_w/this.enemy.getSpeed();
+        let timeFight = this.enemy.getMaxLife()/this.adventurer.getDPS();
+
+        return this.enemy.getMaxLife()/(timeRunning + timeFight);
     }
 
 }

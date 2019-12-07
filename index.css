@@ -86,6 +86,23 @@ body {
     width: 30px;
 }
 
+#info_bar_main{
+    left: 0;
+    right: 0;
+    top: 0;
+    min-height: 100px;
+    position: absolute;
+}
+
+#DPS{
+    top: 20px;
+    left: 50%;
+    color: white;
+    font-size: 30px;
+    margin-left: -100px;
+    position: absolute;
+}
+
 @media (max-width: 1200px){
     .main {
         width: 1200px;

@@ -3,9 +3,23 @@ const fight = 1;
 const baseLife = 100;
 const baseAttack = 1;
 const baseSpeed = (canvas_w/2)/10; // with the base speed the adventurer should reach the enemy in 10 sec
-const animationSpeed = 8; // Change sprites 10 time each second
+const baseCrit = 0.1; // Base critical chance
+const baseCritDMG = 1.5;
+const baseAttackSpeed = 1;
+const baseNumberOfEnemies = 1;
+const critDMGMultiplier = 0.005;
+const attackMultiplier = 1;
+const attackSpeedMultiplier = 0.1;
+const lifeMultiplier = 10;
+const speedMultiplier = canvas_w/200;
+const numberOfEnemiesMultiplier = 1;
+const baseAnimationSpeed = 8; // how often the sprite should change each second
+const animationSpeedMultiplier = 1;
+const nCrit = 100; //Modifier for diminishing returns of the critical chance
+const maxCrit = 0.5; // Max critical chance
 
 
+//TODO magic
 /**
  * Creates a new sprite with an integrated animation function
  * @param filename
@@ -21,6 +35,7 @@ class Sprite {
         this.image.src = filename;
         this.animationIndex = 0;
         this.animationCount = 0;
+        this.animationSpeed = [baseAnimationSpeed, baseAnimationSpeed]; // one for each mode;
         this.mapWidth = mapWidth;
         this.block_w = block_w;
         this.block_h = block_h;
@@ -45,7 +60,7 @@ class Sprite {
      * @param y-Position on the canvas
      */
     drawAnimation(x, y) {
-        if(this.animationCount >= animationSpeed){
+        if(this.animationCount >= this.animationSpeed[this.mode]){
             this.animationIndex++;
             this.animationCount=0;
         }
@@ -79,6 +94,10 @@ class Sprite {
      */
     xy2i(x, y, mapWidth) {
         return y * mapWidth + x;
+    }
+
+    setAnimationSpeed(value, mode){
+        this.animationSpeed[mode] = value;
     }
 }
 
@@ -126,6 +145,10 @@ class Adventurer extends Character{
     constructor(x,y, sprite, mode) {
         super(x,y, sprite, mode);
         this.attack = baseAttack;
+        this.crit = 0.1; // critical strike chance
+        this.critDMG = 1.5; // critical strike damage multiplier
+        this.magic = 0;
+        this.attackSpeed = 1;
     }
 
     /**
@@ -142,15 +165,50 @@ class Adventurer extends Character{
     }
 
     /**
-     * Modifies the attack of the adventurer
-     * @param attack The amount used for the altering of the attribute
+     * Modifies a attribute of the adventurer
+     * @param attr The attribute as string
+     * @param value The value to add
      */
-    modifyAttack(attack) {
-        this.attack += attack;
+    modifyAttribute(attr, value) {
+        switch (attr) {
+            case "attack":
+                this.attack = baseAttack +  attackMultiplier*value;
+                break;
+            case "critDMG":
+                this.critDMG = baseCritDMG + critDMGMultiplier*value;
+                break;
+            case "crit":
+                this.crit = baseCrit +  value/(value+ nCrit)*maxCrit;
+                break;
+            case "magic":
+                this.magic = value;
+                break;
+            case "attackSpeed":
+                this.attackSpeed = baseAttackSpeed + attackSpeedMultiplier*value;
+                //increase animation speed as well
+                this.sprite.setAnimationSpeed(baseAnimationSpeed/this.attackSpeed, fight);
+                break;
+            case "speed":
+                this.sprite.setAnimationSpeed(baseAnimationSpeed - value*animationSpeedMultiplier);
+                break;
+            default:
+                break;
+        }
     }
 
+    /**
+     * Calculates the damage of the next attack
+     */
     getAttack() {
-        return this.attack;
+        if (Math.random() > this.crit) return this.attack*this.attackSpeed*this.critDMG;
+        return this.attack*this.attackSpeed;
+    }
+
+    /**
+     * Calculates the dps of the adventurer
+     */
+    getDPS(){
+        return (this.attack + this.crit*this.attack*this.critDMG)*this.attackSpeed;
     }
 }
 
@@ -164,6 +222,7 @@ class Enemy extends Character{
         this.hp = baseLife;
         this.maxHp = baseLife;
         this.speed = baseSpeed;
+        this.numberOfEnemies = 1;
     }
 
     update(damage) {
@@ -179,24 +238,29 @@ class Enemy extends Character{
      */
     reset(){
         this.x = canvas_w + spawnOffset;
-        this.hp = this.maxHp;
-    }
-
-    /**
-     * Modifies the speed of the enemy
-     * @param speed How much the speed should be increased
-     */
-    modifySpeed(speed){
-        this.speed += speed;
+        this.hp = this.maxHp*this.numberOfEnemies;
     }
 
 
     /**
      * Modifies the max health of the enemy
-     * @param health How much the max life should be increased
+     * @param attr the
+     * @param value
      */
-    modifyMaxHealth(health) {
-        this.maxHp += health;
+    modifyAttribute(attr, value) {
+        switch (attr) {
+            case "health":
+                this.maxHp = baseLife + lifeMultiplier*value;
+                break;
+            case "speed":
+                this.speed = baseSpeed +  speedMultiplier*value;
+                break;
+            case "numberOfEnemies":
+                this.numberOfEnemies = baseNumberOfEnemies + numberOfEnemiesMultiplier*value;
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -209,6 +273,14 @@ class Enemy extends Character{
 
     getLife() {
         return this.hp;
+    }
+
+    getSpeed(){
+        return this.speed;
+    }
+
+    getMaxLife(){
+        return this.maxHp*this.numberOfEnemies;
     }
 }
 
