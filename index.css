@@ -103,6 +103,11 @@ body {
     position: absolute;
 }
 
+#Stats{
+    bottom: 0;
+    position: absolute;
+}
+
 @media (max-width: 1200px){
     .main {
         width: 1200px;
