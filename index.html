@@ -9,39 +9,6 @@
 <body>
     <section class="main">
         <div class="left_menu">
-            <div id="Adventurer">
-                <div id="speed">Speed
-                <button class="buttonAdd" onclick="increase('speed')"></button>
-                </div>
-                <div id="attack">Attack
-                    <button class="buttonAdd" onclick="increase('attack')"></button>
-                </div>
-                <div id="attackSpeed">Attack Speed
-                    <button class="buttonAdd" onclick="increase('attackSpeed')"></button>
-                </div>
-                <div id="crit">Critical Strike Chance
-                    <button class="buttonAdd" onclick="increase('crit')"></button>
-                </div>
-                <div id="critDMG">Critical Strike Damage
-                    <button class="buttonAdd" onclick="increase('critDMG')"></button>
-                </div>
-                <div id="magic">Magic
-                    <button class="buttonAdd" onclick="increase('magic')"></button>
-                </div>
-                <div id="health">Health per Enemy
-                    <button class="buttonAdd" onclick="increase('health')"></button>
-                </div>
-            </div>
-            <div id="Stats">
-                <div id="Stat_Attack">Attack: 1</div>
-                <div id="Stat_AttackSpeed">Attack-Speed: 1</div>
-                <div id="Stat_Speed">Running Speed: 0</div>
-                <div id="Stat_Crit">Critical Strike Chance: 0.1</div>
-                <div id="Stat_CritDMG">Critical Strike Damage: 1.5</div>
-                <div id="Stat_Magic">Magic: 0</div>
-                <div id="Stat_Health">Health per Enemy: 100</div>
-                <div id="Stat_NumberOfEnemies">Number of Enemies: 1</div>
-            </div>
         </div>
 
         <div class="main_screen">
@@ -53,7 +20,45 @@
                 <canvas id="main_canvas"></canvas>
             </div>
         </div>
-        <div class="right-menu">right</div>
+        <div class="right-menu">
+            <div id="AdventurerInfo">
+                <div id="titleAttr" class="infoText">Attributes</div>
+                <div id="AttrBlock">
+                    <div id="speed" class="infoText">Speed
+                        <button class="buttonAdd" onclick="increase('speed')"></button>
+                    </div>
+                    <div id="attack" class="infoText">Attack
+                        <button class="buttonAdd" onclick="increase('attack')"></button>
+                    </div>
+                    <div id="attackSpeed" class="infoText">Attack Speed
+                        <button class="buttonAdd" onclick="increase('attackSpeed')"></button>
+                    </div>
+                    <div id="crit" class="infoText">Critical Strike Chance
+                        <button class="buttonAdd" onclick="increase('crit')"></button>
+                    </div>
+                    <div id="critDMG" class="infoText">Critical Strike Damage
+                        <button class="buttonAdd" onclick="increase('critDMG')"></button>
+                    </div>
+                    <div id="magic" class="infoText">Magic
+                        <button class="buttonAdd" onclick="increase('magic')"></button>
+                    </div>
+                    <div id="health" class="infoText">Health per Enemy
+                        <button class="buttonAdd" onclick="increase('health')"></button>
+                    </div>
+                </div>
+            </div>
+            <div id="StatsInfo">
+                <div class="infoText">Stats</div>
+                <div id="Stat_Attack" class="infoText">Attack: 1</div>
+                <div id="Stat_AttackSpeed" class="infoText">Attack-Speed: 1</div>
+                <div id="Stat_Speed" class="infoText">Running Speed: 0</div>
+                <div id="Stat_Crit" class="infoText">Critical Strike Chance: 0.1</div>
+                <div id="Stat_CritDMG" class="infoText">Critical Strike Damage: 1.5</div>
+                <div id="Stat_Magic" class="infoText">Magic: 0</div>
+                <div id="Stat_Health" class="infoText">Health per Enemy: 100</div>
+                <div id="Stat_NumberOfEnemies" class="infoText">Number of Enemies: 1</div>
+            </div>
+        </div>
         <div class="log"></div>
     </section>
     <script type="text/javascript" src="window_setup.js"></script>
