@@ -34,7 +34,7 @@ function updateCharacterStats(){
     document.getElementById("Stat_Crit").innerText = "Critical Strike Chance: " + mainLoop.adventurer.crit;
     document.getElementById("Stat_CritDMG").innerText = "Critical Strike Damage: " + mainLoop.adventurer.critDMG;
     document.getElementById("Stat_Magic").innerText = "Magic: " + mainLoop.adventurer.magic;
-    document.getElementById("Stat_Health").innerText = "Health per Enemy: " + mainLoop.enemy.getMaxLife();
+    document.getElementById("Stat_Health").innerText = "Health per Enemy: " + mainLoop.enemy.hp;
     document.getElementById("Stat_NumberOfEnemies").innerText = "Number of Enemies: " + mainLoop.enemy.numberOfEnemies;
 }
 

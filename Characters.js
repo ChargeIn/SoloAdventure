@@ -222,7 +222,7 @@ class Enemy extends Character{
         this.hp = baseLife;
         this.maxHp = baseLife;
         this.speed = baseSpeed;
-        this.numberOfEnemies = 1;
+        this.numberOfEnemies = baseNumberOfEnemies;
     }
 
     update(damage) {
@@ -282,6 +282,17 @@ class Enemy extends Character{
     getMaxLife(){
         return this.maxHp*this.numberOfEnemies;
     }
+
+    /**
+     * Overwrite to draw the sprite as ofter as numberOfEnemies
+     * Also varies the x coordinate each time
+     */
+    draw() {
+        for (let i = 0; i < this.numberOfEnemies; i++){
+            this.sprite.drawAnimation(this.x +i*Math.random()*this.numberOfEnemies, this.y+Math.random())
+        }
+    }
+
 }
 
 
