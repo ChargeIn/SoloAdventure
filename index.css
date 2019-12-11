@@ -95,14 +95,20 @@ body {
     top: 0;
     min-height: 100px;
     position: absolute;
+    color: white;
+    font-size: 30px;
 }
 
 #DPS{
     top: 20px;
     left: 50%;
-    color: white;
-    font-size: 30px;
     margin-left: -100px;
+    position: absolute;
+}
+
+#Gold{
+    top: 20px;
+    left: 20px;
     position: absolute;
 }
 

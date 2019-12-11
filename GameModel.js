@@ -23,7 +23,7 @@ const gameStats = {
 };
 //TODO: Rework indexes of the sprites
 
-class gameModell {
+class gameModel {
 
     constructor() {
         this.lastUpdate = 0;
@@ -113,6 +113,8 @@ class gameModell {
                     this.enemy.reset();
                     this.inFight = false;
                     this.background.start();
+                    gameStats.gold += this.enemy.getGoldReward();
+                    updateInfoBar();
                 }
             // Running
             } else {

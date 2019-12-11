@@ -1,12 +1,13 @@
 const run = 0;
 const fight = 1;
+const baseGold = 100;
 const baseLife = 100;
 const baseAttack = 1;
 const baseSpeed = (canvas_w/2)/10; // with the base speed the adventurer should reach the enemy in 10 sec
 const baseCrit = 0.1; // Base critical chance
 const baseCritDMG = 1.5;
 const baseAttackSpeed = 1;
-const baseNumberOfEnemies = 1;
+const baseNumberOfEnemies = 4;
 const critDMGMultiplier = 0.005;
 const attackMultiplier = 1;
 const attackSpeedMultiplier = 0.05;
@@ -17,6 +18,8 @@ const baseAnimationSpeed = 8; // how often the sprite should change each second
 const animationSpeedMultiplier = 1;
 const nCrit = 100; //Modifier for diminishing returns of the critical chance
 const maxCrit = 0.5; // Max critical chance
+const spawnOffsetX = [5, 10, 25, 20];
+const spawnOffsetY = [10, 5, 1, 0];
 
 
 //TODO magic
@@ -219,10 +222,11 @@ class Adventurer extends Character{
 class Enemy extends Character{
     constructor(x,y, sprite, mode) {
         super(x,y, sprite, mode);
-        this.hp = baseLife;
+        this.hp = baseLife*baseNumberOfEnemies;
         this.maxHp = baseLife;
         this.speed = baseSpeed;
         this.numberOfEnemies = baseNumberOfEnemies;
+        this.gold = baseGold;
     }
 
     update(damage) {
@@ -284,12 +288,19 @@ class Enemy extends Character{
     }
 
     /**
+     * Returns the gold reward for killing the enemies
+     */
+    getGoldReward(){
+        return this.gold*this.numberOfEnemies;
+    }
+
+    /**
      * Overwrite to draw the sprite as ofter as numberOfEnemies
      * Also varies the x coordinate each time
      */
     draw() {
         for (let i = 0; i < this.numberOfEnemies; i++){
-            this.sprite.drawAnimation(this.x +i*Math.random()*this.numberOfEnemies, this.y+Math.random())
+            this.sprite.drawAnimation(this.x +spawnOffsetX[i], this.y+spawnOffsetY[i]);
         }
     }
 

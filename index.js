@@ -4,7 +4,7 @@ const main_screen = {
   middle: canvas.width/2
 };
 let dpsView = document.getElementById("DPS");
-let mainLoop = new gameModell();
+let mainLoop = new gameModel();
 mainLoop.start();
 increase(""); // Updates the DPS
 
@@ -44,6 +44,8 @@ function updateCharacterStats(){
 function updateInfoBar(){
     //update DPS view
     dpsView.innerText = "DPS: " + mainLoop.getCurrentDPS().toFixed(4);
+    document.getElementById("Gold").innerText = "Gold: " + gameStats.gold;
+
 }
 
 /**
