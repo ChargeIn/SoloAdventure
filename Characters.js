@@ -1,26 +1,3 @@
-const run = 0;
-const fight = 1;
-const baseGold = 100;
-const baseLife = 100;
-const baseAttack = 1;
-const baseSpeed = (canvas_w/2)/10; // with the base speed the adventurer should reach the enemy in 10 sec
-const baseCrit = 0.1; // Base critical chance
-const baseCritDMG = 1.5;
-const baseAttackSpeed = 1;
-const baseNumberOfEnemies = 4;
-const critDMGMultiplier = 0.005;
-const attackMultiplier = 1;
-const attackSpeedMultiplier = 0.05;
-const lifeMultiplier = 10;
-const speedMultiplier = canvas_w/200;
-const numberOfEnemiesMultiplier = 1;
-const baseAnimationSpeed = 8; // how often the sprite should change each second
-const animationSpeedMultiplier = 1;
-const nCrit = 100; //Modifier for diminishing returns of the critical chance
-const maxCrit = 0.5; // Max critical chance
-const spawnOffsetX = [5, 10, 25, 20];
-const spawnOffsetY = [10, 5, 1, 0];
-
 
 //TODO magic
 /**
@@ -222,8 +199,8 @@ class Adventurer extends Character{
 class Enemy extends Character{
     constructor(x,y, sprite, mode) {
         super(x,y, sprite, mode);
-        this.hp = baseLife*baseNumberOfEnemies;
-        this.maxHp = baseLife;
+        this.hp = baseHealth*baseNumberOfEnemies;
+        this.maxHp = baseHealth;
         this.speed = baseSpeed;
         this.numberOfEnemies = baseNumberOfEnemies;
         this.gold = baseGold;
@@ -254,7 +231,7 @@ class Enemy extends Character{
     modifyAttribute(attr, value) {
         switch (attr) {
             case "health":
-                this.maxHp = baseLife + lifeMultiplier*value;
+                this.maxHp = baseHealth + lifeMultiplier*value;
                 break;
             case "speed":
                 this.speed = baseSpeed +  speedMultiplier*value;

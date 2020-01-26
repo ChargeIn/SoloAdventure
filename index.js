@@ -1,7 +1,7 @@
-
+const round = 100; // The Zeros indicate the number of decimals to show in the ui
 const main_screen = {
-  floor:  canvas.height -10,
-  middle: canvas.width/2
+    floor:  canvas.height -10,
+    middle: canvas.width/2
 };
 let dpsView = document.getElementById("DPS");
 let mainLoop = new gameModel();
@@ -28,14 +28,14 @@ function increase(attr){
  * Updates the view for the character Stats;
  */
 function updateCharacterStats(){
-    document.getElementById("Stat_Attack").innerText = "Attack: " + mainLoop.adventurer.attack;
-    document.getElementById("Stat_AttackSpeed").innerText = "Attack Speed: " + mainLoop.adventurer.attackSpeed;
-    document.getElementById("Stat_Speed").innerText = "Running Speed: " + mainLoop.enemy.speed;
-    document.getElementById("Stat_Crit").innerText = "Critical Strike Chance: " + mainLoop.adventurer.crit;
-    document.getElementById("Stat_CritDMG").innerText = "Critical Strike Damage: " + mainLoop.adventurer.critDMG;
-    document.getElementById("Stat_Magic").innerText = "Magic: " + mainLoop.adventurer.magic;
-    document.getElementById("Stat_Health").innerText = "Health per Enemy: " + mainLoop.enemy.hp;
-    document.getElementById("Stat_NumberOfEnemies").innerText = "Number of Enemies: " + mainLoop.enemy.numberOfEnemies;
+    document.getElementById("Stat_Attack").innerText = "Attack: " + Math.round(mainLoop.adventurer.attack*round) /round;
+    document.getElementById("Stat_AttackSpeed").innerText = "Attack Speed: " + Math.round(mainLoop.adventurer.attackSpeed*round) /round;
+    document.getElementById("Stat_Speed").innerText = "Running Speed: " + Math.round(mainLoop.enemy.speed*round) /round;
+    document.getElementById("Stat_Crit").innerText = "Critical Strike Chance: " + Math.round(mainLoop.adventurer.crit*round) /round;
+    document.getElementById("Stat_CritDMG").innerText = "Critical Strike Damage: " + Math.round(mainLoop.adventurer.critDMG*round) /round;
+    document.getElementById("Stat_Magic").innerText = "Magic: " + Math.round(mainLoop.adventurer.magic*round) /round;
+    document.getElementById("Stat_Health").innerText = "Health per Enemy: " + Math.round(mainLoop.enemy.maxHp*round) /round;
+    document.getElementById("Stat_NumberOfEnemies").innerText = "Number of Enemies: " + Math.round(mainLoop.enemy.numberOfEnemies*round) /round;
 }
 
 /**

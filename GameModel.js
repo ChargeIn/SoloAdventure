@@ -1,26 +1,7 @@
 /**
  * This Script represents the main game loop
  */
-// We want to achieve 60 fps a sec
-const fps = 60;
-const timeStep = 1000 / fps;
-const canvas_h = canvas.height;
-const canvas_w = canvas.width;
-const char_w = 90;
-const char_h = 70;
-const spawnOffset = char_w - 20;
-const fightOffset = 50;
-const gameStats = {
-    attack: 0,
-    speed: 0,
-    health: 0,
-    numberOfEnemies: 0,
-    crit: 0,
-    critDMG: 0,
-    magic: 0,
-    gold: 0,
-    attackSpeed: 0
-};
+
 //TODO: Rework indexes of the sprites
 
 class gameModel {
@@ -31,7 +12,7 @@ class gameModel {
         this.inFight = false;
 
         // create character
-        this.adventurer = new Adventurer(main_screen.middle-char_w, main_screen.floor,
+        this.adventurer = new Adventurer(main_screen.middle-char_w, main_screen.floor+10,
             new Sprite("res/adventurer/adventurer-Sheet.png",
                 50, 37, char_w, char_h,7,
                 [ // 0: Running 1:Fighting
