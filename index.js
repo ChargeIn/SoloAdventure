@@ -2,8 +2,6 @@ let mainLoop = new gameModel();
 mainLoop.start();
 increase("");
 
-
-
 function go2google() {
     window.location.href="https://www.google.de"
 }

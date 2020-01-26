@@ -1,4 +1,9 @@
 /**
+ * UI Parameter
+ */
+const oneTimeUpgrade = 1;
+
+/**
  * Character parameter
  */
 const run = 0;
@@ -7,7 +12,7 @@ const baseGold = 100;
 const baseHealth = 100;
 const baseAttack = 1;
 const baseMagic = 10;
-const baseSpeed = (canvas.width/2)/10; // with the base speed the adventurer should reach the enemy in 10 sec
+const baseSpeed = canvas.width/(2*10); // with the base speed the adventurer should reach the enemy in 10 sec
 const baseCrit = 0.1; // Base critical chance
 const baseCritDMG = 1.5;
 const baseAttackSpeed = 1;
@@ -38,14 +43,14 @@ const char_w = 90;
 const char_h = 70;
 const spawnOffset = char_w - 20;
 const fightOffset = 50;
-const gameStats = {
-    attack: baseSpeed,
-    speed: baseSpeed,
-    health: baseHealth,
-    numberOfEnemies: baseNumberOfEnemies,
-    crit: baseCrit,
-    critDMG: baseCritDMG,
-    magic: baseMagic,
+const UpgradeStats = {
+    attack: 0,
+    speed: 0,
+    health: 0,
+    numberOfEnemies: 0,
+    crit: 0,
+    critDMG: 0,
+    magic: 0,
     gold: 0,
-    attackSpeed: baseAttackSpeed
+    attackSpeed: 0
 };

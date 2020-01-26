@@ -94,7 +94,7 @@ class gameModel {
                     this.enemy.reset();
                     this.inFight = false;
                     this.background.start();
-                    gameStats.gold += this.enemy.getGoldReward();
+                    UpgradeStats.gold += this.enemy.getGoldReward();
                     updateInfoBar();
                 }
             // Running
@@ -120,11 +120,11 @@ class gameModel {
      * @param value The value used for the increase/decrease of the attributes
      */
     modifyAttribute(attr, value){
-        gameStats[attr] += value;
+        UpgradeStats[attr] += value;
 
-        this.background.modifyAttribute(attr,gameStats[attr]);
-        this.adventurer.modifyAttribute(attr, gameStats[attr]);
-        this.enemy.modifyAttribute(attr, gameStats[attr]);
+        this.background.modifyAttribute(attr,UpgradeStats[attr]);
+        this.adventurer.modifyAttribute(attr, UpgradeStats[attr]);
+        this.enemy.modifyAttribute(attr, UpgradeStats[attr]);
     }
 
     /**

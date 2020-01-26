@@ -6,11 +6,11 @@ const main_screen = {
 
 /**
  * Callback for plus buttons
- * Increases the given attribute by 1 and updates the view
+ * Increases the given attribute and updates the view
  * @param attr The attribute as string
  */
 function increase(attr){
-    mainLoop.modifyAttribute(attr, 10);
+    mainLoop.modifyAttribute(attr, oneTimeUpgrade);
 
     updateInfoBar();
     updateCharacterStats();
@@ -20,8 +20,9 @@ function increase(attr){
  * Updates the view for the character Stats;
  */
 function updateCharacterStats(){
+    document.getElementById("Stat_Speed").innerText = "Speed: " + mainLoop.enemy.speed.toFixed(digits);
     document.getElementById("Stat_Attack").innerText = "Attack: " + mainLoop.adventurer.attack.toFixed(digits);
-    document.getElementById("Stat_AttackSpeed").innerText = "Attack Speed: " + mainLoop.enemy.speed.toFixed(digits);
+    document.getElementById("Stat_AttackSpeed").innerText = "Attack Speed: " + mainLoop.adventurer.attackSpeed.toFixed(digits);
     document.getElementById("Stat_Crit").innerText = "Critical Strike Chance: " + mainLoop.adventurer.crit.toFixed(digits);
     document.getElementById("Stat_CritDMG").innerText = "Critical Strike Damage: " + mainLoop.adventurer.critDMG.toFixed(digits);
     document.getElementById("Stat_Magic").innerText = "Magic: " + mainLoop.adventurer.magic.toFixed(digits);
@@ -35,6 +36,6 @@ function updateCharacterStats(){
 function updateInfoBar() {
     //update DPS view
     document.getElementById("DPS").innerText = "DPS: " + mainLoop.getCurrentDPS().toFixed(4);
-    document.getElementById("Gold").innerText = "Gold: " + gameStats.gold;
+    document.getElementById("Gold").innerText = "Gold: " + UpgradeStats.gold;
 }
 
